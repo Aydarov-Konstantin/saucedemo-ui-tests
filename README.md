@@ -1,8 +1,8 @@
 <div align="center">
 
-# Автоматизация UI-тестирования SauceDemo
+# SauceDemo UI Test Automation
 
-Проект для портфолио с автоматизированным сквозным тестированием интернет-магазина [SauceDemo](https://www.saucedemo.com/)
+Portfolio project for end-to-end UI test automation of the [SauceDemo](https://www.saucedemo.com/) online store
 
 [![Java](https://img.shields.io/badge/Java-17-ED8B00?logo=openjdk&logoColor=white)](https://www.oracle.com/java/)
 [![Selenium](https://img.shields.io/badge/Selenium-4.18.1-43B02A?logo=selenium&logoColor=white)](https://www.selenium.dev/)
@@ -12,9 +12,9 @@
 
 </div>
 
-> Проект проверяет успешное оформление покупки в Google Chrome: авторизацию, добавление товара в корзину, оформление и подтверждение заказа.
+> The project validates the complete purchase journey in Google Chrome: authentication, adding products to the cart, checkout, and order confirmation.
 
-## Стек технологий
+## Tech Stack
 
 - Java 17
 - Selenium WebDriver
@@ -23,104 +23,106 @@
 - WebDriverManager
 - Allure Report
 - Page Object Model
+- GitHub Actions
 
-## Проверяемые сценарии
+## Test Scenarios
 
-1. `Успешное оформление покупки`
+1. `Successful purchase`
 
-   Открытие SauceDemo, авторизация, добавление Sauce Labs Backpack в корзину, оформление и проверка сообщения `Thank you for your order!`.
+   Opens SauceDemo, signs in, adds Sauce Labs Backpack to the cart, completes checkout, and verifies the `Thank you for your order!` confirmation.
 
-2. `Покупка нескольких товаров`
+2. `Multiple-product purchase`
 
-   Добавление Sauce Labs Backpack и Sauce Labs Bike Light, оформление заказа и подтверждение покупки.
+   Adds Sauce Labs Backpack and Sauce Labs Bike Light, completes checkout, and verifies the order confirmation.
 
-3. `Неверные учётные данные`
+3. `Invalid credentials`
 
-   Проверка сообщения об ошибке при неверном пароле.
+   Verifies the error message shown after signing in with an incorrect password.
 
-4. `Заблокированный пользователь`
+4. `Locked-out user`
 
-   Проверка запрета входа для учётной записи `locked_out_user`.
+   Verifies that the `locked_out_user` account cannot sign in.
 
-5. `Сортировка товаров по цене`
+5. `Product sorting by price`
 
-   Проверка порядка цен после выбора сортировки от меньшей цены к большей.
+   Verifies product order after selecting low-to-high price sorting.
 
-6. `Удаление товара из корзины`
+6. `Remove product from cart`
 
-   Проверка удаления Sauce Labs Backpack и обновления количества товаров в корзине.
+   Verifies removal of Sauce Labs Backpack and the cart item count update.
 
-7. `Валидация оформления заказа`
+7. `Checkout form validation`
 
-   Проверка сообщения об ошибке при попытке продолжить без имени.
+   Verifies the error message shown when the user continues without entering a first name.
 
-## Структура проекта
+## Project Structure
 
 ```text
 src/test/java/com/saucedemo
-├── pages/        # Page Object-классы для экранов сценария
-├── tests/        # Базовая настройка и сквозной тест
-└── utils/        # Конфигурация и управление жизненным циклом WebDriver
+├── pages/        # Page Object classes for each screen
+├── tests/        # Test setup and end-to-end scenarios
+└── utils/        # WebDriver configuration and lifecycle management
 
 src/test/resources
 └── allure.properties
 ```
 
-## Требования
+## Prerequisites
 
-- JDK 17 или новее
-- Maven 3.9 или новее
+- JDK 17 or later
+- Maven 3.9 or later
 - Google Chrome
 
-WebDriverManager автоматически загружает и настраивает ChromeDriver.
+ChromeDriver is downloaded and configured automatically by WebDriverManager.
 
-## Запуск тестов
+## Run Tests
 
-После загрузки репозитория выполните:
+Run the following command after cloning the repository:
 
 ```bash
 mvn clean test
 ```
 
-Браузер запускается в режиме инкогнито, открывается на весь экран и закрывается после выполнения теста.
+The browser runs in incognito mode, maximizes its window, and closes after each test.
 
-## Allure-отчёт
+## Allure Report
 
-После запуска теста откройте локальный сервер с Allure-отчётом:
+Start a local Allure report server after running the tests:
 
 ```bash
 mvn allure:serve
 ```
 
-Для генерации статических файлов отчёта выполните:
+Generate static report files instead:
 
 ```bash
 mvn allure:report
 ```
 
-## Непрерывная интеграция
+## Continuous Integration
 
-GitHub Actions запускает весь набор UI-тестов при каждом обновлении репозитория, запросе на объединение и ручном запуске workflow. Результаты Allure сохраняются в артефактах запуска и доступны для скачивания из раздела Actions.
+GitHub Actions runs the complete UI test suite on every push, pull request, and manual workflow dispatch. Allure results are saved as workflow artifacts.
 
-## Детали реализации
+## Implementation Details
 
-- Тест построен по паттерну Page Object Model: локаторы и действия со страницами отделены от тестовой логики.
-- `BaseTest` управляет настройкой и закрытием браузера для каждого теста.
-- `DriverFactory` настраивает Chrome, таймауты и жизненный цикл WebDriver.
-- Аннотации Allure добавляют в отчёт информацию о функциональности, пользовательской истории, критичности и сценарии.
+- Page Object Model separates locators and page actions from test logic.
+- `BaseTest` manages browser setup and teardown for every test.
+- `DriverFactory` configures Chrome, timeouts, and WebDriver lifecycle management.
+- Tests run in headless mode in CI environments.
+- Allure annotations add feature, story, severity, and scenario descriptions to test reports.
 
-## Результат тестирования
+## Test Results
 
 <div align="center">
 
-| Тесты | Результат | Ошибки | Падения |
-| :---: | :-------: | :----: | :------: |
-| 7 | ✅ Пройдено | 0 | 0 |
+| Tests | Result | Errors | Failures |
+| :---: | :----: | :----: | :------: |
+| 7 | ✅ Passed | 0 | 0 |
 
 </div>
 
-Последний запуск завершён успешно.
+The latest test run completed successfully.
 
-## Автор
+## Author
 
 Konstantin
