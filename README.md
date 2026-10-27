@@ -125,4 +125,4 @@ The latest test run completed successfully.
 
 ## Author
 
-Konstantin
+Aydarov Konstantin
