@@ -123,6 +123,8 @@ GitHub Actions runs the complete UI test suite on every push, pull request, and 
 
 The latest test run completed successfully.
 
-## Author
+<div align="center">
 
-Aydarov Konstantin
+Maintained by [Konstantin Aydarov](https://github.com/Aydarov-Konstantin)
+
+</div>
